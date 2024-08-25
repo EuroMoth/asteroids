@@ -4,6 +4,8 @@
 import pygame
 from constants import *
 from player import *
+from asteroid import Asteroid
+from asteroidfield import *
 
 def main():
 	pygame.init()
@@ -12,14 +14,19 @@ def main():
 
 	updatable = pygame.sprite.Group()
 	drawable = pygame.sprite.Group()
+	asteroids = pygame.sprite.Group()
+
+	Asteroid.containers = (updatable, drawable, asteroids)
+	AsteroidField.containers = (updatable,)
+	field = AsteroidField()
 
 	Player.containers = (updatable, drawable)
-
 	player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 	
-	print("Starting asteroids!")
-	print(f"Screen width: {SCREEN_WIDTH}")
-	print(f"Screen height: {SCREEN_HEIGHT}")
+	
+	#print("Starting asteroids!")
+	#print(f"Screen width: {SCREEN_WIDTH}")
+	#print(f"Screen height: {SCREEN_HEIGHT}")
 
 	clock = pygame.time.Clock()
 	dt = 0
@@ -37,6 +44,7 @@ def main():
 
 		for item in drawable:
 			item.draw(screen)
+
 
 		pygame.display.flip()
 		
